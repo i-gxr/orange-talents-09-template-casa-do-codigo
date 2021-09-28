@@ -1,7 +1,12 @@
 package br.com.zup.casa_do_codigo.controllers.requests;
 
 import br.com.zup.casa_do_codigo.entities.Autor;
+import br.com.zup.casa_do_codigo.repositories.AutorRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.validation.constraints.AssertFalse;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -31,4 +36,7 @@ public class AutorRequest {
         return new Autor(this.nome, this.email, this.descricao);
     }
 
+    public String getEmail() {
+        return email;
+    }
 }
