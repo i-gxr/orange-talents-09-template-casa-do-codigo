@@ -1,7 +1,7 @@
 package br.com.zup.casa_do_codigo.controllers;
 
 import br.com.zup.casa_do_codigo.controllers.requests.AutorRequest;
-import br.com.zup.casa_do_codigo.controllers.validation.ProibeEmailDuplicadoValidator;
+import br.com.zup.casa_do_codigo.controllers.validation.ValorUnicoGenericoValidator;
 import br.com.zup.casa_do_codigo.entities.Autor;
 import br.com.zup.casa_do_codigo.repositories.AutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +19,11 @@ public class AutorController {
     private AutorRepository repository;
 
     @Autowired
-    private ProibeEmailDuplicadoValidator proibeEmailDuplicadoAutorValidator;
+    private ValorUnicoGenericoValidator validacao;
 
     @InitBinder
     public void init(WebDataBinder binder) {
-        binder.addValidators(proibeEmailDuplicadoAutorValidator);
+        binder.addValidators(validacao);
     }
 
     @PostMapping

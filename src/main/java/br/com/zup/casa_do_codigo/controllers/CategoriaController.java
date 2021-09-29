@@ -1,7 +1,7 @@
 package br.com.zup.casa_do_codigo.controllers;
 
 import br.com.zup.casa_do_codigo.controllers.requests.CategoriaRequest;
-import br.com.zup.casa_do_codigo.controllers.validation.ProibeNomeDuplicadoCategoriaValidator;
+import br.com.zup.casa_do_codigo.controllers.validation.ValorUnicoGenericoValidator;
 import br.com.zup.casa_do_codigo.entities.Categoria;
 import br.com.zup.casa_do_codigo.repositories.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +19,11 @@ public class CategoriaController {
     private CategoriaRepository repository;
 
     @Autowired
-    private ProibeNomeDuplicadoCategoriaValidator proibeNomeDuplicadoCategoriaValidator;
+    private ValorUnicoGenericoValidator validacao;
 
     @InitBinder
     public void init(WebDataBinder binder) {
-        binder.addValidators(proibeNomeDuplicadoCategoriaValidator);
+        binder.addValidators(validacao);
     }
 
     @PostMapping

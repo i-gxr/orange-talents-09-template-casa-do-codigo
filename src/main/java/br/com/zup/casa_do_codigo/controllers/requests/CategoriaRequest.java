@@ -4,7 +4,7 @@ import br.com.zup.casa_do_codigo.entities.Categoria;
 
 import javax.validation.constraints.NotBlank;
 
-public class CategoriaRequest {
+public class CategoriaRequest implements GenericRequest {
 
     @NotBlank
     private String nome;
@@ -22,5 +22,20 @@ public class CategoriaRequest {
 
     public Categoria toModel() {
         return new Categoria(this.nome);
+    }
+
+    @Override
+    public String getValorUnico() {
+        return this.nome;
+    }
+
+    @Override
+    public String getNomeAtributoValorUnico() {
+        return "nome";
+    }
+
+    @Override
+    public String getNomeTabela() {
+        return "Categoria";
     }
 }

@@ -11,7 +11,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-public class AutorRequest {
+public class AutorRequest implements GenericRequest {
 
     @NotBlank
     private String nome;
@@ -38,5 +38,20 @@ public class AutorRequest {
 
     public Autor toModel() {
         return new Autor(this.nome, this.email, this.descricao);
+    }
+
+    @Override
+    public String getValorUnico() {
+        return this.getEmail();
+    }
+
+    @Override
+    public String getNomeAtributoValorUnico() {
+        return "email";
+    }
+
+    @Override
+    public String getNomeTabela() {
+        return "Autor";
     }
 }
