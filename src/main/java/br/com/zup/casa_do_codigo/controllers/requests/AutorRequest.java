@@ -1,23 +1,20 @@
 package br.com.zup.casa_do_codigo.controllers.requests;
 
+import br.com.zup.casa_do_codigo.controllers.validation.UniqueValue;
 import br.com.zup.casa_do_codigo.entities.Autor;
-import br.com.zup.casa_do_codigo.repositories.AutorRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.validation.constraints.AssertFalse;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-public class AutorRequest implements GenericRequest {
+public class AutorRequest {
 
     @NotBlank
     private String nome;
 
     @NotBlank
     @Email
+    @UniqueValue(domainClass = Autor.class, fieldName = "email")
     private String email;
 
     @NotBlank
@@ -40,18 +37,4 @@ public class AutorRequest implements GenericRequest {
         return new Autor(this.nome, this.email, this.descricao);
     }
 
-    @Override
-    public String getValorUnico() {
-        return this.getEmail();
-    }
-
-    @Override
-    public String getNomeAtributoValorUnico() {
-        return "email";
-    }
-
-    @Override
-    public String getNomeTabela() {
-        return "Autor";
-    }
 }

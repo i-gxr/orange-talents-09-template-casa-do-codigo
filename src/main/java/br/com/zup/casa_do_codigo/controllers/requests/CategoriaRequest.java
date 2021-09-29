@@ -1,12 +1,14 @@
 package br.com.zup.casa_do_codigo.controllers.requests;
 
+import br.com.zup.casa_do_codigo.controllers.validation.UniqueValue;
 import br.com.zup.casa_do_codigo.entities.Categoria;
 
 import javax.validation.constraints.NotBlank;
 
-public class CategoriaRequest implements GenericRequest {
+public class CategoriaRequest {
 
     @NotBlank
+    @UniqueValue(domainClass = Categoria.class, fieldName = "nome")
     private String nome;
 
     @Deprecated
@@ -24,18 +26,4 @@ public class CategoriaRequest implements GenericRequest {
         return new Categoria(this.nome);
     }
 
-    @Override
-    public String getValorUnico() {
-        return this.nome;
-    }
-
-    @Override
-    public String getNomeAtributoValorUnico() {
-        return "nome";
-    }
-
-    @Override
-    public String getNomeTabela() {
-        return "Categoria";
-    }
 }
