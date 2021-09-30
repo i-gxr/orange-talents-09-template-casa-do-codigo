@@ -20,7 +20,7 @@ public class ControllerExceptionHandler {
     @Autowired
     private MessageSource messageSource;
 
-    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ValidationErrorsOutputDto handleValidationError(MethodArgumentNotValidException e) {
         List<ObjectError> globalErrors = e.getBindingResult().getGlobalErrors();

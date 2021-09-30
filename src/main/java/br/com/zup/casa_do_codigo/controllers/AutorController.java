@@ -22,8 +22,8 @@ public class AutorController {
     @PostMapping
     @Transactional
     public void inserir(@RequestBody @Valid AutorRequest request) {
-            Autor autor = request.toModel();
-            repository.save(autor);
+        Autor autor = request.toModel();
+        repository.save(autor);
     }
 
 }

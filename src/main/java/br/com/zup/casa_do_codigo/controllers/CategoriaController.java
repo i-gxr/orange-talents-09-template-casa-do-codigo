@@ -22,8 +22,8 @@ public class CategoriaController {
     @PostMapping
     @Transactional
     public void inserir(@RequestBody @Valid CategoriaRequest request) {
-            Categoria categoria = request.toModel();
-            repository.save(categoria);
+        Categoria categoria = request.toModel();
+        repository.save(categoria);
     }
 
 }
