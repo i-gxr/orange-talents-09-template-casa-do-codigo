@@ -60,4 +60,32 @@ public class Livro {
     public String getTitulo() {
         return titulo;
     }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public String getResumo() {
+        return resumo;
+    }
+
+    public String getSumario() {
+        return sumario;
+    }
+
+    public Integer getQtdPaginas() {
+        return qtdPaginas;
+    }
+
+    public BigDecimal getPreco() {
+        return preco;
+    }
+
+    public LocalDate getDataPublicacao() {
+        return dataPublicacao;
+    }
+
+    public Autor getAutor() {
+        return autor;
+    }
 }
