@@ -1,9 +1,6 @@
 package br.com.zup.casa_do_codigo.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -11,6 +8,10 @@ import java.time.LocalDate;
 public class Livro {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false, unique = true)
     private String isbn;
 
     @Column(nullable = false, unique = true)

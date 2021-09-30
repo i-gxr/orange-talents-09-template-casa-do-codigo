@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.Optional;
@@ -24,18 +26,13 @@ public class LivroController {
     @Autowired
     private LivroRepository repository;
 
-    @Autowired
-    private AutorRepository autorRepository;
-
-    @Autowired
-    private CategoriaRepository categoriaRepository;
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @PostMapping
     @Transactional
     public void inserir(@RequestBody @Valid LivroRequest request) {
-        Autor autor = autorRepository.findById(request.getAutorId()).get();
-        Categoria categoria = categoriaRepository.findById(request.getCategoriaId()).get();
-        Livro livro = request.toModel(autor, categoria);
+        Livro livro = request.toModel(entityManager);
         repository.save(livro);
     }
 

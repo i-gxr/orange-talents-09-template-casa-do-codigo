@@ -5,7 +5,13 @@ import br.com.zup.casa_do_codigo.controllers.validation.UniqueValue;
 import br.com.zup.casa_do_codigo.entities.Autor;
 import br.com.zup.casa_do_codigo.entities.Categoria;
 import br.com.zup.casa_do_codigo.entities.Livro;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
+import javax.persistence.EntityManager;
 import javax.persistence.Lob;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
@@ -69,7 +75,9 @@ public class LivroRequest {
         return autorId;
     }
 
-    public Livro toModel(Autor autor, Categoria categoria) {
+    public Livro toModel(EntityManager em) {
+        Autor autor = em.find(Autor.class, autorId);
+        Categoria categoria = em.find(Categoria.class, categoriaId);
         return new Livro(isbn, titulo, resumo, sumario, qtdPaginas, preco, dataPublicacao, autor, categoria);
     }
 }
