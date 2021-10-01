@@ -11,6 +11,7 @@ public class Categoria {
     private Long id;
 
     @Column(nullable = false, unique = true)
+    @NotBlank
     private String nome;
 
     @Deprecated

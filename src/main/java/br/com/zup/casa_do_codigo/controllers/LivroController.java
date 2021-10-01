@@ -4,16 +4,14 @@ import br.com.zup.casa_do_codigo.controllers.requests.LivroRequest;
 import br.com.zup.casa_do_codigo.controllers.responses.LivroDetailsResponse;
 import br.com.zup.casa_do_codigo.controllers.responses.LivroSimpleResponse;
 import br.com.zup.casa_do_codigo.entities.Livro;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -33,11 +31,11 @@ public class LivroController {
     }
 
     @GetMapping("/{id}")
-    public LivroDetailsResponse buscarPorId(@PathVariable Long id) {
-        Optional<Livro> livro = Optional.ofNullable(entityManager.find(Livro.class, id));
-        if (livro.isEmpty())
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Não foi encontrado nenhum livro com o id informado!");
-        return new LivroDetailsResponse(livro.get());
+    public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
+        Livro livro = entityManager.find(Livro.class, id);
+        if (livro == null)
+            return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(new LivroDetailsResponse(livro));
     }
 
     @PostMapping

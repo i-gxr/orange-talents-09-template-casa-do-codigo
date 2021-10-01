@@ -1,6 +1,7 @@
 package br.com.zup.casa_do_codigo.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -12,24 +13,36 @@ public class Livro {
     private Long id;
 
     @Column(nullable = false, unique = true)
+    @NotBlank
     private String isbn;
 
     @Column(nullable = false, unique = true)
+    @NotBlank
     private String titulo;
 
     @Column(nullable = false, length = 500)
+    @NotBlank
+    @Size(max = 500)
     private String resumo;
 
     @Column(nullable = false, columnDefinition = "CLOB")
+    @NotBlank
+    @Lob
     private String sumario;
 
     @Column(nullable = false)
+    @NotNull
+    @Min(value = 100)
     private Integer qtdPaginas;
 
     @Column(nullable = false)
+    @NotNull
+    @DecimalMin(value = "20.0")
     private BigDecimal preco;
 
     @Column(nullable = false)
+    @NotNull
+    @Future
     private LocalDate dataPublicacao;
 
     @ManyToOne

@@ -1,6 +1,5 @@
 package br.com.zup.casa_do_codigo.controllers.exceptions;
 
-import br.com.zup.casa_do_codigo.controllers.dto.SimpleErrorOutputDto;
 import br.com.zup.casa_do_codigo.controllers.dto.ValidationErrorsOutputDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -28,12 +26,6 @@ public class ControllerExceptionHandler {
         List<ObjectError> globalErrors = e.getBindingResult().getGlobalErrors();
         List<FieldError> fieldErrors = e.getBindingResult().getFieldErrors();
         return buildValidationErrors(globalErrors, fieldErrors);
-    }
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(ResponseStatusException.class)
-    public SimpleErrorOutputDto handleValidationError(ResponseStatusException e) {
-        return new SimpleErrorOutputDto(e.getReason());
     }
 
     private ValidationErrorsOutputDto buildValidationErrors(List<ObjectError> globalErrors, List<FieldError> fieldErrors) {
